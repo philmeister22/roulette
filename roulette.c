@@ -47,4 +47,3 @@ int  main(int argc, char const *argv[]) {
   printf("vaffanculo\n");
   return 0;
 }
-bastardo

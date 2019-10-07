@@ -25,14 +25,14 @@ int  main(int argc, char *argv[]) {
   char sc;
   int dsp=10000;
   char gc;
-  printf("buongiorno, bonus di primo accesso di 10000pt\n");
+  printf("Benvenuto, bonus di primo accesso di 10000pt \n");
   do {
-    printf("menu\n");
-    printf("1-carica credito\n");
-    printf("2-gioca \n");
-    printf("3-visulizza saldo\n");
-    printf("0-esci\n" );
-    printf("scegli ->  ");
+    printf("\n\n MENU \n"
+           "1->carica credito \n"
+           "2->gioca \n"
+           "3->visulizza saldo \n"
+           "Q->esci \n\n"
+           "Inserisci la scelta e premi invio: ");
     scanf("%c", &sc);
     switch (sc) {
       case('1'):
@@ -40,14 +40,14 @@ int  main(int argc, char *argv[]) {
       break;
       case '2':
         do {
-          printf("menu\n");
-          printf("1-punta sui neri\n");
-          printf("2-punta sui rossi\n");
-          printf("3-punta su un numero\n");
-          printf("4-menu precedente\n");
-          printf("scegli -> \n");
-          scanf("%c", &gc);
+          printf("\n\n MENU \n"
+                 "1->punta sui neri \n"
+                 "2->punta sui rossi \n"
+                 "3->punta su un numero \n"
+                 "B->menu precedente \n"
+                 "Inserisci la scelta e premi invio: ");
 
+          scanf("%c", &gc);
 
         } while(gc!='4');
       break;

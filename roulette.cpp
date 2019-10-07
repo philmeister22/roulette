@@ -1,3 +1,5 @@
+/*Luca: io consiglierei di mantenere il progetto in C, visto e considerato che è ciò che studieremo*/
+
 #include<iostream>
 #include<stdio.h>
 #include<math.h>
@@ -12,7 +14,8 @@ int  main(int argc, char const *argv[]) {
   struct puntata{// struct contenente la coppia valore/tipo di puntata
     int valore;
     char tipo;
-  }
+  };
+
   using namespace std;
   char sc;
   int dsp=10000;
@@ -20,7 +23,8 @@ int  main(int argc, char const *argv[]) {
   int rossi[]={1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36}; // array contenente tutti i numeri rossi
   int neri[]={2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35}; //array contenente tutti i numeri neri
   int  n; // numero di giocate che un singolo giocatore vuole fare in una mano
-  struct giocate[];//array contente i valori delle singole puntate (es 10 sui rossi e 1 su un numero nella stessa partita)
+  /*struct giocate[]; array contente i valori delle singole puntate (es 10 sui rossi e 1 su un numero nella stessa partita)
+                      L: Non si dichiara così un array di struct*/
   printf("buongiorno, bonus di primo accesso di 10000pt\n");
   do {
     printf("menu\n");

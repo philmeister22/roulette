@@ -1,13 +1,10 @@
 #include <stdio.h>
-#include <math.h>
-#include <string.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
+#include <math.h>
 
 #define MAX 10
 #define MAXNUM 4
-
-
 
 
 /* COMUNICAZIONI
@@ -25,53 +22,48 @@ L: "Puntate base:
 */
 
 
+/* struct corrispondente a una giocata:
+    tipo: nome della puntata fatta (rossi, pari, cavallo...)
+    numeri: array contenente i numeri della giocata, vuoto nel caso siano
+            puntate esterne
+    valore: il valore in crediti della puntata
+    vincente: bool per indicare se la giocata è vincente
+    next: pointer alla struct successiva*/
 typedef struct puntata{
     char tipo[MAX];
     int numeri[MAXNUM];
     int valore;
+    int vincente;
 	struct puntata *next;
-} punt;/*L: la struct è da rifinire una volta che decidiamo assieme come
-            codificare le puntate"*/
+} punt;
 
 
-/*int ricarica(int, int);*/
-int ricarica(int s){
-  int tmp;
-  printf("inserisci il valore della ricarica che si vuole effettuare-> \n" );
-  scanf("%d", &tmp);
-  s=s+tmp;
-  return s;
-}
-/*AF:int generator(){
-  int n;
-  srand(time(NULL));
-  n=0+rand()%37;
-  printf(" numero generato %d\n",n );
-  return n;
-}*/
+int ricarica(int);
+
+
 void gioco();
 
 
 int  main(int argc, char *argv[]) {
-    char sceltaMenu, nweLine;
+    char sceltaMenu, newLine;
     int bilancio = 10000, quit = 0;
 
     /* printf("Benvenuto, bonus di primo accesso di 10000pt \n");*/
     while(!quit){
         printf("\n\n MENU \n"
-            "1->carica credito \n"
-            "2->gioca \n"
-            "3->visulizza saldo \n"
-            "Q->esci \n\n"
+            "1 -> carica crediti \n"
+            "2 -> gioca \n"
+            "3 -> visulizza ssaldo bilancio \n"
+            "Q -> esci \n\n"
             "Inserisci la scelta e premi invio: ");
 
-        scanf("%c%c", &sceltaMenu, &nweLine);
+        scanf("%c%c", &sceltaMenu, &newLine);
 
         switch (sceltaMenu){
 
             case '1':
-                printf("Ricarica \n\n");
-                bilancio=ricarica(bilancio);
+                /* printf("Ricarica \n\n");*/
+                bilancio = ricarica(bilancio);
                 break;
 
             case '2':
@@ -79,7 +71,7 @@ int  main(int argc, char *argv[]) {
                 break;
 
             case '3':
-                printf("La disponibilità è di %d crediti \n\n", bilancio);
+                printf("Il saldo del bilancio è di %d crediti \n\n", bilancio);
                 break;
 
             case 'Q':
@@ -91,7 +83,7 @@ int  main(int argc, char *argv[]) {
                 break;
         }
     }
-    printf("vaffanculo\n");
+    printf("Arrivederci! \n");
     return 0;
 }
 
@@ -101,73 +93,90 @@ void gioco(){
 
     while (!quitGioco){
         printf("\n\n MENU GIOCATE \n"
-               "1->punta sui neri \n"
-               "2->punta sui rossi \n"
-               "3->punta su un numero \n"
-               "4->punta su una sestina\n"
-               "5->punta su una colonna\n"
-               "6->punta su un passe\n"
-               "7->punta su un manque\n"
-               "8->punta su una dozzina (prima, seconda o terza)\n"
-               "9->punta sui cavalli\n"
-               "P->punta sui pari\n"
-               "D->punta sui dispari\n"
-               "C->punta sui carrè\n"
-               "T->punta su una terzina\n"
-               "B->menu precedente \n"
+               "Puntate semplici: \n"
+               "\t 0 -> punta su pari o dispari  \n"
+               "\t 1 -> punta su manque (1-18) o passe (19-36) \n"
+               "\t 2 -> punta su rosso o nero \n"
+               "\t 3 -> punta su 1a, 2a o 3a dozzina \n"
+               "\t 4 -> punta su 1a, 2a o 3a colonna \n"
+               "\t 5 -> punta su una sestina \n"
+               "\t 6 -> punta su un carrè (quartina) \n"
+               "\t 7 -> punta su una terzina \n"
+               "\t 8 -> punta su un cavallo (coppia) \n"
+               "\t 9 -> punta su un numero pieno\n"
+               "\t B -> menu precedente \n"
                "Inserisci la scelta e premi invio: ");
 
         scanf("%c%c", &sceltaGioco, &newLine);
 
         switch (sceltaGioco){
 
+            case '0':
+                printf("pari dispari");
+                break;
+
             case '1':
-                printf("Punta sui neri");
+                printf("manque passe");
                 break;
 
             case '2':
-                printf("Punta sui rossi");
+                printf("rosso nero");
                 break;
 
             case '3':
-                printf("Punta su un numero");
+                printf("dozzina");
                 break;
+
             case '4':
-                printf("Punta su una sestina");
+                printf("colonna");
                 break;
+
             case '5':
-                printf("Punta su una colonna");
+                printf("sestina");
                 break;
+
             case '6':
-                printf("Punta su un passe");
+                printf("carrè");
                 break;
+
             case '7':
-                printf("Punta su un manque");
+                printf("terzina");
                 break;
+
             case '8':
-                printf("Punta su una dozzina");
+                printf("cavallo");
                 break;
+
             case '9':
-                printf("Punta sui cavalli");
+                printf("numero pieno");
                 break;
-            case 'P':
-                printf("Punta sui pari");
-                break;
-            case 'D':
-                printf("Punta sui dispari");
-                break;
-            case 'C':
-                printf("Punta su un carre");
-                break;
-            case 'T':
-                printf("Punta su una terzina");
-                break;
+
             case 'B':
                 quitGioco = 1;
                 break;
+
             default:
                printf("Errore nella scelta del menu");
                break;
         }
     }
+}
+
+
+int ricarica(int bilancio){
+  int importo;
+  printf("Inserire l'importo che si vuole ricaricare e premere invio: ");
+  scanf("%d", &importo);
+  return bilancio + importo;
+}
+
+
+int generator(){
+  int numVincente;
+  srand(time(NULL));
+  return rand() % 37; /* modulo 37 è per ottenere un numero tra 0 e 36*/
+
+  /* numVincente = rand() % 37;
+  printf("Il numero vincente è %d \n", numVincente);
+  return n;*/
 }

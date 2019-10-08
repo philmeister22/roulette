@@ -39,8 +39,7 @@ typedef struct puntata{
 
 
 int ricarica(int);
-
-
+int generatore();
 void gioco();
 
 
@@ -58,11 +57,10 @@ int  main(int argc, char *argv[]) {
             "Inserisci la scelta e premi invio: ");
 
         scanf("%c%c", &sceltaMenu, &newLine);
-
+        /*FIXME: se si ricarica poi l'input ha problemi nella lettura/e successiva/e*/
         switch (sceltaMenu){
 
             case '1':
-                /* printf("Ricarica \n\n");*/
                 bilancio = ricarica(bilancio);
                 break;
 
@@ -86,6 +84,7 @@ int  main(int argc, char *argv[]) {
     printf("Arrivederci! \n");
     return 0;
 }
+
 
 void gioco(){
     char sceltaGioco, newLine;
@@ -171,7 +170,7 @@ int ricarica(int bilancio){
 }
 
 
-int generator(){
+int generatore(){
   int numVincente;
   srand(time(NULL));
   return rand() % 37; /* modulo 37 è per ottenere un numero tra 0 e 36*/

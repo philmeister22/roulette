@@ -65,7 +65,7 @@ int  main(int argc, char *argv[]) {
             "Q->esci \n\n"
             "Inserisci la scelta e premi invio: ");
 
-        scanf("%c%c", &sceltaMenu, &nweLine);
+        scanf("%c%c", &sceltaMenu, &newLine);
 
         switch (sceltaMenu){
 

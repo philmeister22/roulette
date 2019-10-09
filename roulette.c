@@ -44,7 +44,7 @@ void gioco();
 
 
 int  main(int argc, char *argv[]) {
-    char sceltaMenu, newLine;
+    char sceltaMenu;
     int bilancio = 10000, quit = 0;
 
     /* printf("Benvenuto, bonus di primo accesso di 10000pt \n");*/
@@ -56,7 +56,8 @@ int  main(int argc, char *argv[]) {
             "Q -> esci \n\n"
             "Inserisci la scelta e premi invio: ");
 
-        scanf("%c%c", &sceltaMenu, &newLine);
+        scanf("%c", &sceltaMenu);
+        fflush(stdin);
         /*FIXME: se si ricarica poi l'input ha problemi nella lettura/e successiva/e*/
         switch (sceltaMenu){
 
@@ -69,7 +70,7 @@ int  main(int argc, char *argv[]) {
                 break;
 
             case '3':
-                printf("Il saldo del bilancio è di %d crediti \n\n", bilancio);
+                printf("Il saldo del bilancio e' di %d crediti \n\n", bilancio);
                 break;
 
             case 'Q':
@@ -83,11 +84,9 @@ int  main(int argc, char *argv[]) {
     }
     printf("Arrivederci! \n");
     return 0;
-}
-
 
 void gioco(){
-    char sceltaGioco, newLine;
+    char sceltaGioco;
     int quitGioco = 0;
 
     while (!quitGioco){
@@ -106,7 +105,8 @@ void gioco(){
                "\t B -> menu precedente \n"
                "Inserisci la scelta e premi invio: ");
 
-        scanf("%c%c", &sceltaGioco, &newLine);
+        scanf("%c", &sceltaGioco);
+        fflush(stdin);
 
         switch (sceltaGioco){
 
@@ -166,6 +166,7 @@ int ricarica(int bilancio){
   int importo;
   printf("Inserire l'importo che si vuole ricaricare e premere invio: ");
   scanf("%d", &importo);
+  fflush(stdin);
   return bilancio + importo;
 }
 

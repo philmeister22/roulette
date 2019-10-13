@@ -42,20 +42,19 @@ int generatore();
 void gioco();
 
 
-int  main(int argc, char *argv[]) {
-    char sceltaMenu;
+int  main(int argc, char *argv[]){
     int rossi[]={1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
     int neri[]={2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35};
+    char sceltaMenu;
     int bilancio = 10000, quit = 0;
 
-    /* printf("Benvenuto, bonus di primo accesso di 10000pt \n");*/
     while(!quit){
-        printf("\n\n MENU \n"
-            "1 -> carica crediti \n"
-            "2 -> gioca \n"
-            "3 -> visulizza ssaldo bilancio \n"
-            "Q -> esci \n\n"
-            "Inserisci la scelta e premi invio: ");
+        printf("\n\n -----MENU----- \n"
+               "1 -> carica crediti \n"
+               "2 -> gioca \n"
+               "3 -> visulizza ssaldo bilancio \n"
+               "Q -> esci \n\n"
+               "Inserisci la scelta e premi invio: ");
 
         scanf("%c", &sceltaMenu);
         fflush(stdin);
@@ -71,7 +70,7 @@ int  main(int argc, char *argv[]) {
                 break;
 
             case '3':
-                printf("Il saldo del bilancio è di %d crediti \n\n", bilancio);
+                printf("Il saldo del bilancio e' di %d crediti \n\n", bilancio);
                 break;
 
             case 'q':   /*per intercettare anche le minuscole*/
@@ -94,7 +93,7 @@ void gioco(){
     int quitGioco = 0;
 
     while (!quitGioco){
-        printf("\n\n MENU GIOCATE \n"
+        printf("\n\n -----MENU GIOCATE----- \n"
                "Puntate semplici: \n"
                "\t 0 -> punta su pari o dispari  \n"
                "\t 1 -> punta su manque (1-18) o passe (19-36) \n"
@@ -183,9 +182,5 @@ int ricarica(int bilancio){
 
 int generatore(){
   srand(time(NULL));
-  return rand() % 37; /* modulo 37 è per ottenere un numero tra 0 e 36*/
-
-  /* numVincente = rand() % 37;
-  printf("Il numero vincente è %d \n", numVincente);
-  return n;*/
+  return rand() % 37;
 }

@@ -19,12 +19,18 @@
 
 /* COMUNICAZIONI
 L: ho mosso la struct in roulette.h
+L: Abbiamo un problema con la struct e ci sono due soluzioni:
+   ci rompiamo il cazzo a fare le malloc e le free per la struct
+   con array variabili o li facciamo statici, un pochino meno eleganti
+   ma sicuramente molto molto più semplici (si potrà sempre implementare
+   in modo dinamico dopo una volta che il progetto è finito)
 */
 
 
 int ricarica(int);
 int generatore();
 void gioco();
+void betPlacer();    /*TODO*/
 
 
 int  main(int argc, char *argv[]){
@@ -76,8 +82,9 @@ int  main(int argc, char *argv[]){
 
 
 void gioco(){
-    char sceltaGioco;
+    char sceltaGioco, *tipoPunt;
     int quitGioco = 0;
+    bet *puntate;
 
     while (!quitGioco){
         printf("\n\n -----MENU GIOCATE----- \n"
@@ -147,6 +154,7 @@ void gioco(){
 
             case 'b':   /*per intercettare anche le minuscole*/
             case 'B':
+                freelist(puntate);
                 quitGioco = 1;
                 break;
 

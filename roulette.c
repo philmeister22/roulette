@@ -6,20 +6,19 @@
 #define MAX 10
 #define MAXNUM 4
 
+#define EVEN_ODD_WIN 1
+#define MANQUE_PASSE_WIN 1  /*(1-18, 19-36)*/
+#define RED_BLK_WIN 1
+#define DOZZ_WIN 2  /*(1-12, 13-24, 25-36)-*/
+#define COLUMN_WIN 2
+#define SEXTINE_WIN 5
+#define CARRE_WIN 8 /*(gruppi da 4)*/
+#define TRIPLET_WIN 11  /*(righe, 012, 023)*/
+#define DOUBLE_WIN 17   /*(coppie)*/
+#define SINGLE_WIN 35
 
-/* COMUNICAZIONI
-L: "Puntate base:
-        pari e dispari X1
-        manque e passe X1 (1-18, 19-36)-
-        rosso e nero X1-
-        dozzine X2 (1-12, 13-24, 25-36)-
-        colonne X2-
-        sestine X5-
-        carrè X8 (gruppi da 4)-
-        terzine X11 (righe, 012, 023)-
-        cavalli X17 (coppie)-
-        singole X35"
-*/
+
+/* COMUNICAZIONI*/
 
 
 /* struct corrispondente a una giocata:
@@ -44,7 +43,9 @@ void gioco();
 
 
 int  main(int argc, char *argv[]) {
-    char sceltaMenu, newLine;
+    char sceltaMenu;
+    int rossi[]={1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
+    int neri[]={2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35};
     int bilancio = 10000, quit = 0;
 
     /* printf("Benvenuto, bonus di primo accesso di 10000pt \n");*/
@@ -56,8 +57,9 @@ int  main(int argc, char *argv[]) {
             "Q -> esci \n\n"
             "Inserisci la scelta e premi invio: ");
 
-        scanf("%c%c", &sceltaMenu, &newLine);
-        /*FIXME: se si ricarica poi l'input ha problemi nella lettura/e successiva/e*/
+        scanf("%c", &sceltaMenu);
+        fflush(stdin);
+
         switch (sceltaMenu){
 
             case '1':
@@ -72,6 +74,7 @@ int  main(int argc, char *argv[]) {
                 printf("Il saldo del bilancio è di %d crediti \n\n", bilancio);
                 break;
 
+            case 'q':   /*per intercettare anche le minuscole*/
             case 'Q':
                 quit = 1;
                 break;
@@ -87,7 +90,7 @@ int  main(int argc, char *argv[]) {
 
 
 void gioco(){
-    char sceltaGioco, newLine;
+    char sceltaGioco;
     int quitGioco = 0;
 
     while (!quitGioco){
@@ -103,13 +106,14 @@ void gioco(){
                "\t 7 -> punta su una terzina \n"
                "\t 8 -> punta su un cavallo (coppia) \n"
                "\t 9 -> punta su un numero pieno\n"
+               "\t G -> lancia la pallina\n"
                "\t B -> menu precedente \n"
                "Inserisci la scelta e premi invio: ");
 
-        scanf("%c%c", &sceltaGioco, &newLine);
+        scanf("%c", &sceltaGioco);
+        fflush(stdin);
 
         switch (sceltaGioco){
-
             case '0':
                 printf("pari dispari");
                 break;
@@ -150,6 +154,12 @@ void gioco(){
                 printf("numero pieno");
                 break;
 
+            case 'g':   /*per intercettare anche le minuscole*/
+            case 'G':
+                printf("numero vincente %d", generatore());
+                break;
+
+            case 'b':   /*per intercettare anche le minuscole*/
             case 'B':
                 quitGioco = 1;
                 break;
@@ -166,12 +176,12 @@ int ricarica(int bilancio){
   int importo;
   printf("Inserire l'importo che si vuole ricaricare e premere invio: ");
   scanf("%d", &importo);
+  fflush(stdin);
   return bilancio + importo;
 }
 
 
 int generatore(){
-  int numVincente;
   srand(time(NULL));
   return rand() % 37; /* modulo 37 è per ottenere un numero tra 0 e 36*/
 

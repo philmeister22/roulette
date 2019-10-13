@@ -8,7 +8,7 @@
             puntate esterne
     valore: il valore in crediti della puntata
     vincente: bool per indicare se la giocata è vincente
-    next: pointer alla struct successiva*/
+    next: pointer alla struct successiva */
 typedef struct puntata{
     char *tipo;
     int *numeri;
@@ -18,13 +18,16 @@ typedef struct puntata{
 } bet;
 
 
-bet *append(bet *, char *, int[], int); /*append(betlist, tipo, valore)*/
+bet *append(bet *, char *, int[], int); /*append(listHead, tipo, valore)*/
+void freelist(bet *); /*freelis(listHead)*/
 
 
+/*aggiunge una struct alla lista fornita con head*/
 bet *append(bet *head, char tipoPunt[], int numPunt[], int valPunt){
 
 	bet *tmp;
 	bet *ptr;
+
 	if(tmp = (bet*)malloc(sizeof(bet))){
         tmp->tipo = tipoPunt;
         tmp->numeri = numPunt;
@@ -46,4 +49,20 @@ bet *append(bet *head, char tipoPunt[], int numPunt[], int valPunt){
                tipoPunt, valPunt);
 
 	return head;
+}
+
+
+/*svuota completamente la lista fornita con head*/
+void freelist(bet *head){
+
+   bet* tmp;
+
+   while (head != NULL)
+    {
+       tmp = head;
+       head = head->next;
+       free(tmp);
+    }
+
+	return;
 }

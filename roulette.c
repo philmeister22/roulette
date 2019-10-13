@@ -3,38 +3,23 @@
 #include <time.h>
 #include <math.h>
 
-#define MAX 10
-#define MAXNUM 4
+
 
 #define EVEN_ODD_WIN 1
-#define MANQUE_PASSE_WIN 1  /*(1-18, 19-36)*/
+#define MANQUE_PASSE_WIN 1    /*(1-18, 19-36)*/
 #define RED_BLK_WIN 1
-#define DOZZ_WIN 2  /*(1-12, 13-24, 25-36)-*/
+#define DOZZ_WIN 2    /*(1-12, 13-24, 25-36)-*/
 #define COLUMN_WIN 2
 #define SEXTINE_WIN 5
-#define CARRE_WIN 8 /*(gruppi da 4)*/
-#define TRIPLET_WIN 11  /*(righe, 012, 023)*/
-#define DOUBLE_WIN 17   /*(coppie)*/
+#define CARRE_WIN 8    /*(gruppi da 4)*/
+#define TRIPLET_WIN 11    /*(righe, 012, 023)*/
+#define DOUBLE_WIN 17    /*(coppie)*/
 #define SINGLE_WIN 35
 
 
-/* COMUNICAZIONI*/
-
-
-/* struct corrispondente a una giocata:
-    tipo: nome della puntata fatta (rossi, pari, cavallo...)
-    numeri: array contenente i numeri della giocata, vuoto nel caso siano
-            puntate esterne
-    valore: il valore in crediti della puntata
-    vincente: bool per indicare se la giocata è vincente
-    next: pointer alla struct successiva*/
-typedef struct puntata{
-    char tipo[MAX];
-    int numeri[MAXNUM];
-    int valore;
-    int vincente;
-	struct puntata *next;
-} punt;
+/* COMUNICAZIONI
+L: ho mosso la struct in roulette.h
+*/
 
 
 int ricarica(int);
@@ -49,7 +34,8 @@ int  main(int argc, char *argv[]){
     int bilancio = 10000, quit = 0;
 
     while(!quit){
-        printf("\n\n -----MENU----- \n"
+        printf("\n\n"
+               "-----MENU----- \n"
                "1 -> carica crediti \n"
                "2 -> gioca \n"
                "3 -> visulizza ssaldo bilancio \n"
@@ -83,7 +69,8 @@ int  main(int argc, char *argv[]){
                 break;
         }
     }
-    printf("Arrivederci! \n");
+    printf("\n\n"
+           "Arrivederci! \n");
     return 0;
 }
 

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-
+#include <roulette.h>
 
 
 #define EVEN_ODD_WIN 1
@@ -38,7 +38,7 @@ int  main(int argc, char *argv[]){
                "-----MENU----- \n"
                "1 -> carica crediti \n"
                "2 -> gioca \n"
-               "3 -> visulizza ssaldo bilancio \n"
+               "3 -> visulizza saldo bilancio \n"
                "Q -> esci \n\n"
                "Inserisci la scelta e premi invio: ");
 

@@ -21,11 +21,6 @@ typedef struct puntata{
 	struct puntata *next;
 } bet;
 
-/*
-bet *test = (bet *)malloc(sizeof(bet) +
-					      sizeof(char[strlen(tipoPunt)])
-						  sizeof(int) * *(numPunt - 1))
-*/
 
 bet *append(bet *, char *, int[], int); /*append(listHead, tipo, valore)*/
 void freelist(bet *); /*freelis(listHead)*/

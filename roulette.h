@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define MAXCHAR 8
+#define MAXINT 4
 
 
 /* struct corrispondente a una giocata:
@@ -10,8 +14,8 @@
     vincente: bool per indicare se la giocata è vincente
     next: pointer alla struct successiva */
 typedef struct puntata{
-    char *tipo;
-    int *numeri;
+    char tipo[MAXCHAR];
+    int numeri[MAXINT];
     int valore;
     int vincente;
 	struct puntata *next;
@@ -34,8 +38,15 @@ bet *append(bet *head, char tipoPunt[], int numPunt[], int valPunt){
 	bet *ptr;
 
 	if(tmp = (bet*)malloc(sizeof(bet))){
-        tmp->tipo = tipoPunt;
-        tmp->numeri = numPunt;
+
+        int i;
+
+        for(i = 0; i <= strlen(tipoPunt); i++){
+            tmp->tipo[i] = tipoPunt[i];
+        }
+        for(i = 0; i <= *(numPunt - 1); i++){
+            tmp->numeri[i] = numPunt[i];
+        }
 		tmp->valore = valPunt;
 		tmp->next=NULL;
 

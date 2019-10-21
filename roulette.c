@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-#include <roulette.h>
+#include "roulette.h"
 
 
 #define EVEN_ODD_WIN 1

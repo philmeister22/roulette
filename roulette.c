@@ -30,7 +30,7 @@ L: Abbiamo un problema con la struct e ci sono due soluzioni:
 int ricarica(int);
 int generatore();
 void gioco();
-void betPlacer();    /*TODO*/
+bet *betPlacer(bet *, char *);    /*TODO:*/
 
 
 int  main(int argc, char *argv[]){
@@ -82,7 +82,7 @@ int  main(int argc, char *argv[]){
 
 
 void gioco(){
-    char sceltaGioco, *tipoPunt;
+    char sceltaGioco, sceltaPunt=NULL, *tipoPunt;
     int quitGioco = 0;
     bet *puntate;
 
@@ -104,59 +104,94 @@ void gioco(){
                "Inserisci la scelta e premi invio: ");
 
         scanf("%c", &sceltaGioco);
+        printf("\n");
         fflush(stdin);
 
-        switch (sceltaGioco){
-            case '0':
-                printf("pari dispari");
+        switch(sceltaGioco){
+
+            /*Ho creato un prototipo di come saranno create le chiamate alla betPlacer*/
+            case '0':    /*TODO: creare una funzione prototipo per velocizzare il controllo dell'input*/
+                while(!sceltaPunt){
+                    printf("Vuoi giocare Pari(P) o Dispari(D)? ");
+
+                    scanf("%c", &sceltaPunt);
+                    printf("\n");
+                    fflush(stdin);
+
+                    if(sceltaPunt != "P" || sceltaPunt != "p" ||
+                       sceltaPunt != "D" || sceltaPunt != "d"){
+                           sceltaPunt = NULL;
+                           printf("Errore nella scelta della giocata! \n");
+                       }
+                }
+
+                if(sceltaPunt == "P" || sceltaPunt == "p"){
+                    puntate = betPlacer(puntate, "pari");
+                }
+                else{
+                    puntate = betPlacer(puntate, "dispari");
+                }
+
                 break;
+
 
             case '1':
                 printf("manque passe");
                 break;
 
+
             case '2':
                 printf("rosso nero");
                 break;
+
 
             case '3':
                 printf("dozzina");
                 break;
 
+
             case '4':
                 printf("colonna");
                 break;
+
 
             case '5':
                 printf("sestina");
                 break;
 
+
             case '6':
                 printf("carrè");
                 break;
+
 
             case '7':
                 printf("terzina");
                 break;
 
+
             case '8':
                 printf("cavallo");
                 break;
 
+
             case '9':
                 printf("numero pieno");
                 break;
+
 
             case 'g':   /*per intercettare anche le minuscole*/
             case 'G':
                 printf("numero vincente %d", generatore());
                 break;
 
+
             case 'b':   /*per intercettare anche le minuscole*/
             case 'B':
                 freelist(puntate);
                 quitGioco = 1;
                 break;
+
 
             default:
                printf("Errore nella scelta del menu");

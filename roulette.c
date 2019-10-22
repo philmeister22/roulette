@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-#include "roulette.h"
+#include "lib/roulette.h"
 
 
 #define EVEN_ODD_WIN 1
@@ -108,9 +108,9 @@ void gioco(){
         fflush(stdin);
 
         switch(sceltaGioco){
-
-            /*Ho creato un prototipo di come saranno create le chiamate alla betPlacer*/
-            case '0':    /*TODO: creare una funzione prototipo per velocizzare il controllo dell'input*/
+            /*TODO: creare una funzione prototipo per velocizzare il controllo dell'input*/
+            /*L: Ho creato un prototipo di come saranno create le chiamate alla betPlacer*/
+            case '0':
                 while(!sceltaPunt){
                     printf("Vuoi giocare Pari(P) o Dispari(D)? ");
 

@@ -3,6 +3,7 @@
 #include <time.h>
 #include <math.h>
 #include "lib/betStruct.h"
+#include "lib/betHandler.h"
 
 
 #define EVEN_ODD_WIN 1
@@ -30,7 +31,7 @@ L: Abbiamo un problema con la struct e ci sono due soluzioni:
 int ricarica(int);
 int generatore();
 void gioco();
-bet *betPlacer(bet *, char *);    /*TODO:*/
+/*L: ho spostato betPlacer nell'header betStruct */
 
 
 int  main(int argc, char *argv[]){

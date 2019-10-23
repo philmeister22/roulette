@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef BETSTRUCT_H_
+#define BETSTRUCT_H_
+
 #define MAXCHAR 8
 #define MAXINT 4
 
@@ -32,7 +35,7 @@ bet *append(bet *head, char tipoPunt[], int numPunt[], int valPunt){
 	bet *tmp;
 	bet *ptr;
 
-	if(tmp = (bet*)malloc(sizeof(bet))){
+	if((tmp = (bet*)malloc(sizeof(bet)))){
 
         int i;
 
@@ -77,3 +80,5 @@ void freelist(bet *head){
 
 	return;
 }
+
+#endif

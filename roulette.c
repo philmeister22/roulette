@@ -83,8 +83,8 @@ int  main(int argc, char *argv[]){
 
 
 void gioco(){
-    char sceltaGioco, sceltaPunt=NULL, *tipoPunt;
-    int quitGioco = 0;
+    char sceltaGioco, sceltaPunt, *tipoPunt;
+    int quitGioco = 0, quitSelPunt;
     bet *puntate;
 
     while (!quitGioco){
@@ -107,30 +107,35 @@ void gioco(){
         scanf("%c", &sceltaGioco);
         printf("\n");
         fflush(stdin);
+        quitSelPunt = 0; 
 
         switch(sceltaGioco){
             /*TODO: creare una funzione prototipo per velocizzare il controllo dell'input*/
             /*L: Ho creato un prototipo di come saranno create le chiamate alla betPlacer*/
             case '0':
-                while(!sceltaPunt){
-                    printf("Vuoi giocare Pari(P) o Dispari(D)? ");
+                while(!quitSelPunt){
+                    printf("Vuoi giocare Pari(P) o Dispari(D) oppure Annulare(A)? ");
 
                     scanf("%c", &sceltaPunt);
                     printf("\n");
                     fflush(stdin);
 
-                    if(sceltaPunt != "P" || sceltaPunt != "p" ||
-                       sceltaPunt != "D" || sceltaPunt != "d"){
-                           sceltaPunt = NULL;
-                           printf("Errore nella scelta della giocata! \n");
+                    if(sceltaPunt == 'P' || sceltaPunt == 'p' ||
+                       sceltaPunt == 'D' || sceltaPunt == 'd' ||
+                       sceltaPunt == 'A' || sceltaPunt == 'a'){
+                           quitSelPunt = 1;
                        }
                 }
 
-                if(sceltaPunt == "P" || sceltaPunt == "p"){
+                if(sceltaPunt == 'P' || sceltaPunt == 'p'){
                     puntate = betPlacer(puntate, "pari");
                 }
-                else{
+                else if(sceltaPunt == 'D' || sceltaPunt == 'd'){
                     puntate = betPlacer(puntate, "dispari");
+                }
+                else
+                {
+                    printf("\nRitorno al menu puntate \n\n");
                 }
 
                 break;

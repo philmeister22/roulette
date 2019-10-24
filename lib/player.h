@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include "openssl\evp.h"
-
 
 #define MAX_USERNAME
 #define MAX_PASSWORD

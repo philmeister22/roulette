@@ -3,7 +3,6 @@
 #include <string.h>
 
 #define MAXCHAR 8
-#define MAXINT 4
 
 
 /* struct corrispondente a una giocata:
@@ -15,7 +14,7 @@
     next: pointer alla struct successiva */
 typedef struct puntata{
     char tipo[MAXCHAR];
-    int numeri[MAXINT];
+    int *numeri;
     int valore;
     int vincente;
 	struct puntata *next;

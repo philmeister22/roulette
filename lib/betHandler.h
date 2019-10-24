@@ -8,9 +8,10 @@ bet *betPlacer(bet *, char *);
 
 bet *betPlacer(bet* head, char *tipoPunt){
     int valPunt, *numPunt = NULL;
+
     do{
         printf("\n\nQuanti crediti vuoi puntare? ");
-    }while(scanf("%d", &valPunt));
+    }while(!scanf("%d", &valPunt));
 
     if(!strcmp(tipoPunt, "pari") || !strcmp(tipoPunt, "dispari") ||
        !strcmp(tipoPunt, "manque") || !strcmp(tipoPunt, "passe") ||

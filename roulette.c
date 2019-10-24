@@ -2,9 +2,15 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <ctype.h>
 #include "lib/betStruct.h"
 #include "lib/betHandler.h"
 
+
+#define NUM_DOMANDE 10
+#define LUNG_DOMANDE 30
+#define NUM_RISPOSTE
+#define LUNG_RISPOSTE
 
 #define EVEN_ODD_WIN 1
 #define MANQUE_PASSE_WIN 1    /*(1-18, 19-36)*/
@@ -28,9 +34,10 @@ L: Abbiamo un problema con la struct e ci sono due soluzioni:
 */
 
 
+char menuPuntata(int);
 int ricarica(int);
 int generatore();
-void gioco();
+void menuGioco();
 /*L: ho spostato betPlacer nell'header betStruct */
 
 
@@ -59,7 +66,7 @@ int  main(int argc, char *argv[]){
                 break;
 
             case '2':
-                gioco();
+                menuGioco();
                 break;
 
             case '3':
@@ -78,11 +85,12 @@ int  main(int argc, char *argv[]){
     }
     printf("\n\n"
            "Arrivederci! \n");
+
     return 0;
 }
 
 
-void gioco(){
+void menuGioco(){
     char sceltaGioco, sceltaPunt, *tipoPunt;
     int quitGioco = 0, quitSelPunt;
     bet *puntate;
@@ -107,25 +115,27 @@ void gioco(){
         scanf("%c", &sceltaGioco);
         printf("\n");
         fflush(stdin);
-        quitSelPunt = 0; 
+        quitSelPunt = 0;
 
         switch(sceltaGioco){
             /*TODO: creare una funzione prototipo per velocizzare il controllo dell'input*/
             /*L: Ho creato un prototipo di come saranno create le chiamate alla betPlacer*/
             case '0':
+
                 while(!quitSelPunt){
-                    printf("Vuoi giocare Pari(P) o Dispari(D) oppure Annulare(A)? ");
+                    printf("Vuoi giocare Pari, Dispari oppure vuoi Annulare? \n(P)(D)(A): ");
 
                     scanf("%c", &sceltaPunt);
+                    sceltaPunt = toupper(sceltaPunt);
                     printf("\n");
                     fflush(stdin);
 
-                    if(sceltaPunt == 'P' || sceltaPunt == 'p' ||
-                       sceltaPunt == 'D' || sceltaPunt == 'd' ||
-                       sceltaPunt == 'A' || sceltaPunt == 'a'){
-                           quitSelPunt = 1;
-                       }
+                    if(sceltaPunt == 'P' || sceltaPunt == 'D' || sceltaPunt == 'A') quitSelPunt = 1;
+                    else printf("Errore nella scelta effettuata, riprovare! \n\n");
                 }
+
+
+                /* sceltaPunt = menuPuntata(sceltaGioco);*/
 
                 if(sceltaPunt == 'P' || sceltaPunt == 'p'){
                     puntate = betPlacer(puntate, "pari");
@@ -206,6 +216,16 @@ void gioco(){
     }
 }
 
+
+char menuPuntata(int index){
+    const char arrDomande[NUM_DOMANDE][LUNG_DOMANDE] = {
+        "Vuoi giocare Pari(P), Dispari(D) oppure vuoi Annulare(A)? \n(P)(D)(A): ",
+        "Vuoi giocare Manque(M), Passe(P) oppure vuoi Annulare(A)? "
+        "Vuoi giocare Rosso(R), Nero(N) oppure vuoi Annulare(A)? "
+        "Vuoi giocare la Prima(P), la Seconda(S) o la Terza(T) dozzina(1-12, 13-24, 25-36), oppure vuoi Annulare(A)? "
+        "Vuoi giocare una Sestina(S) oppure vuoi Annullare(A)?"
+    };
+}
 
 int ricarica(int bilancio){
   int importo;

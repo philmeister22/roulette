@@ -5,10 +5,11 @@
 #include <ctype.h>
 #include "lib/betStruct.h"
 #include "lib/betHandler.h"
+#include "lib/player.h"
 
 
 #define NUM_DOMANDE 10
-#define LUNG_DOMANDE 30
+#define LUNG_DOMANDE 40
 #define NUM_RISPOSTE
 #define LUNG_RISPOSTE
 

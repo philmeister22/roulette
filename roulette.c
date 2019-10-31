@@ -47,6 +47,8 @@ int  main(int argc, char *argv[]){
     char sceltaMenu;
     int bilancio = 10000, quit = 0;
 
+    login();
+
     while(!quit){
         printf("\n\n"
                "-----MENU----- \n"

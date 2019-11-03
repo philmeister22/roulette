@@ -20,7 +20,9 @@ void login(){
     scanf("%s", &username);
 
     if(fp = fopen("users", "rb")){
-
+        printf("Inserisci il tuo username: ");
+        scanf("%s", &username);
     }
+
 
 }

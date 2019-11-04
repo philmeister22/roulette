@@ -45,10 +45,11 @@ void menuGioco();
 int  main(int argc, char *argv[]){
     int rossi[]={1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
     int neri[]={2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35};
-    char sceltaMenu;
+    player *player;
+    char sceltaMenu, flush;
     int bilancio = 10000, quit = 0;
 
-    login();
+    player = login();
 
     while(!quit){
         printf("\n\n"
@@ -60,7 +61,7 @@ int  main(int argc, char *argv[]){
                "Inserisci la scelta e premi invio: ");
 
         scanf("%c", &sceltaMenu);
-        fflush(stdin);
+        while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
 
         switch (sceltaMenu){
 
@@ -94,7 +95,7 @@ int  main(int argc, char *argv[]){
 
 
 void menuGioco(){
-    char sceltaGioco, sceltaPunt, *tipoPunt;
+    char sceltaGioco, sceltaPunt, *tipoPunt, flush;
     int quitGioco = 0, quitSelPunt;
     bet *puntate;
 
@@ -107,7 +108,7 @@ void menuGioco(){
                "\t 3 -> punta su 1a, 2a o 3a dozzina \n"
                "\t 4 -> punta su 1a, 2a o 3a colonna \n"
                "\t 5 -> punta su una sestina \n"
-               "\t 6 -> punta su un carrè (quartina) \n"
+               "\t 6 -> punta su un carr\x82 (quartina) \n"
                "\t 7 -> punta su una terzina \n"
                "\t 8 -> punta su un cavallo (coppia) \n"
                "\t 9 -> punta su un numero pieno\n"
@@ -117,7 +118,7 @@ void menuGioco(){
 
         scanf("%c", &sceltaGioco);
         printf("\n");
-        fflush(stdin);
+        while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
         quitSelPunt = 0;
 
         switch(sceltaGioco){
@@ -131,7 +132,7 @@ void menuGioco(){
                     scanf("%c", &sceltaPunt);
                     sceltaPunt = toupper(sceltaPunt);
                     printf("\n");
-                    fflush(stdin);
+                    while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
 
                     if(sceltaPunt == 'P' || sceltaPunt == 'D' || sceltaPunt == 'A') quitSelPunt = 1;
                     else printf("Errore nella scelta effettuata, riprovare! \n\n");
@@ -180,7 +181,7 @@ void menuGioco(){
 
 
             case '6':
-                printf("carrè");
+                printf("carr\x82");
                 break;
 
 
@@ -232,9 +233,10 @@ char menuPuntata(int index){
 
 int ricarica(int bilancio){
   int importo;
+  char flush;
   printf("Inserire l'importo che si vuole ricaricare e premere invio: ");
   scanf("%d", &importo);
-  fflush(stdin);
+  while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
   return bilancio + importo;
 }
 

@@ -2,6 +2,10 @@
 
 roulette in linguaggio C
 
+//cose da fare 29/10:
+-- utente e conto (file)
+-- correzione secondo menu (gioco)
+
 Regole:
   
   -bonus di benvenuto di 10000pt

@@ -116,6 +116,7 @@ void menuGioco(){
                "Inserisci la scelta e premi invio: ");
 
         scanf("%c", &sceltaGioco);
+        sceltaGioco = toupper(sceltaGioco);
         printf("\n");
         fflush(stdin);
         quitSelPunt = 0;
@@ -140,10 +141,10 @@ void menuGioco(){
 
                 /* sceltaPunt = menuPuntata(sceltaGioco);*/
 
-                if(sceltaPunt == 'P' || sceltaPunt == 'p'){
+                if(sceltaPunt == 'P'){
                     puntate = betPlacer(puntate, "pari");
                 }
-                else if(sceltaPunt == 'D' || sceltaPunt == 'd'){
+                else if(sceltaPunt == 'D'){
                     puntate = betPlacer(puntate, "dispari");
                 }
                 else
@@ -155,9 +156,33 @@ void menuGioco(){
 
 
             case '1':
-                printf("manque passe");
-                break;
+                while(!quitSelPunt){
+                    printf("Vuoi giocare Manque (1-18), Passe (19-36) oppure vuoi Annulare? \n(M)(P)(A): ");
 
+                    scanf("%c", &sceltaPunt);
+                    sceltaPunt = toupper(sceltaPunt);
+                    printf("\n");
+                    fflush(stdin);
+
+                    if(sceltaPunt == 'M' || sceltaPunt == 'P' || sceltaPunt == 'A') quitSelPunt = 1;
+                    else printf("Errore nella scelta effettuata, riprovare! \n\n");
+                }
+
+
+                /* sceltaPunt = menuPuntata(sceltaGioco);*/
+
+                if(sceltaPunt == 'M'){
+                    puntate = betPlacer(puntate, "manque");
+                }
+                else if(sceltaPunt == 'P'){
+                    puntate = betPlacer(puntate, "passe");
+                }
+                else
+                {
+                    printf("\nRitorno al menu puntate \n\n");
+                }
+
+                break;
 
             case '2':
                 printf("rosso nero");
@@ -199,13 +224,11 @@ void menuGioco(){
                 break;
 
 
-            case 'g':   /*per intercettare anche le minuscole*/
             case 'G':
                 printf("numero vincente %d", generatore());
                 break;
 
 
-            case 'b':   /*per intercettare anche le minuscole*/
             case 'B':
                 freelist(puntate);
                 quitGioco = 1;
@@ -219,7 +242,7 @@ void menuGioco(){
     }
 }
 
-
+//Filippo: sorry but, which is the utility of this function?
 char menuPuntata(int index){
     const char arrDomande[NUM_DOMANDE][LUNG_DOMANDE] = {
         "Vuoi giocare Pari(P), Dispari(D) oppure vuoi Annulare(A)? \n(P)(D)(A): ",

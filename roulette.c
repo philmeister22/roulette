@@ -163,7 +163,7 @@ void menuGioco(){
                     scanf("%c", &sceltaPunt);
                     sceltaPunt = toupper(sceltaPunt);
                     printf("\n");
-                    fflush(stdin);
+                    while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
 
                     if(sceltaPunt == 'M' || sceltaPunt == 'P' || sceltaPunt == 'A') quitSelPunt = 1;
                     else printf("Errore nella scelta effettuata, riprovare! \n\n");

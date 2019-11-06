@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define PLAYERS_FILE "players.txt"
+#define SAVE_FILE "players.txt"
 #define MAX_USERNAME 30
 #define MAX_PASSWORD
 
@@ -26,14 +26,35 @@ void serialize(player *);       /* stampa la struct fornita nel file predefinito
 
 player *login(){
 
-    char inputName[MAX_USERNAME + 1], flush;
+    char inputName[MAX_USERNAME + 1], sceltaNewp;
     player *player = NULL;
+    FILE *fp;
+
+
+    if(!(fp = fopen(SAVE_FILE, "r"))){
+        while(1){
+            printf("\nIl tuo salvataggio risulta inesistente, vuoi crearne uno nuovo(N)"
+                "oppure vuoi chiudere(C) il gioco? ");
+            scanf(" %c%*[^]", &sceltaNewp);
+            printf("\n");
+            sceltaNewp = toupper(sceltaNewp);
+
+            if(sceltaNewp == 'N'){
+                fp = fopen(SAVE_FILE, "w+");
+                fclose(fp);
+                return newPlayer();
+            }else if(sceltaNewp == 'C')
+                exit(0);
+            else
+                printf("\nErrore nella scelta inserita \n");
+            }
+    }
+
 
     while(!player){
         do{
             printf("\nInserisci il tuo username: ");
-            scanf("%30s", inputName);
-            /*while ((flush = fgetc(stdin)) != '\n' && flush != EOF);     /* flush buffer */
+            scanf(" %30s", inputName);
         }while(!checkUsername(inputName));
 
         player = userExist(inputName);
@@ -44,11 +65,13 @@ player *login(){
     return player;
 }
 
+
 /* TODO: create register user function*/
 player *newPlayer(){
     printf("Nuovo utente!!");
     return NULL;
 }
+
 
 int checkUsername(char *username){
     int i = 0;
@@ -70,12 +93,13 @@ int checkUsername(char *username){
 
 
 player *userExist(char *username){
+
     FILE *fp;
     player *tmp = NULL;
     char sceltaNewp, tmpName[MAX_USERNAME + 1] = {0};
     int tmpSaldo = 0;
 
-    if((fp = fopen(PLAYERS_FILE, "r"))){
+    if((fp = fopen(SAVE_FILE, "r"))){
 
         while(!feof(fp)){
             fscanf(fp, "%[^;];%d ", &tmpName, &tmpSaldo);
@@ -93,6 +117,7 @@ player *userExist(char *username){
                     printf("\nL'utente inserito non esiste! \n"
                            "Vuoi registrarti(R) oppure inserire un altro username(U)? ");
                     scanf(" %c%*[^]", &sceltaNewp);
+                    printf("\n");
                     sceltaNewp = toupper(sceltaNewp);
 
                     if(sceltaNewp == 'R') return newPlayer();
@@ -102,7 +127,7 @@ player *userExist(char *username){
             }
         }
     }else
-        printf("Errore nell'apertura del file %s\n\n", PLAYERS_FILE);
+        printf("Errore nell'apertura del file %s\n\n", SAVE_FILE);
 
     return tmp;
 }
@@ -118,23 +143,10 @@ void serialize(player* out){
     else
         printf("Errore allocazione memoria per stampa a file\n\n");
 
-    if(fp = fopen(PLAYERS_FILE, "a")){
+    if(fp = fopen(SAVE_FILE, "a")){
         fprintf(fp, "%s\n", tmp);
         free(tmp);
     }else
-        printf("Errore nell'apertura del file %s\n\n", PLAYERS_FILE);
+        printf("Errore nell'apertura del file %s\n\n", SAVE_FILE);
 
 }
-
-
-/*
-    player = malloc(sizeof(player));
-    strcpy(player->username, inputName);
-    player->saldo = 10000;
-
-    serialize(fp, player, sizeof(player));
-    fclose(fp);
-
-    return 0;
-}
-*/

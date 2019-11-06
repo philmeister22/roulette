@@ -60,8 +60,8 @@ int  main(int argc, char *argv[]){
                "Q -> esci \n\n"
                "Inserisci la scelta e premi invio: ");
 
-        scanf("%c", &sceltaMenu);
-        while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
+        scanf(" %c%*[^]", &sceltaMenu);   /* lo spazio ci permette di rimuovere ogni trailing
+                                        withespace e %*s rimuove ogni carattere in più*/
 
         switch (sceltaMenu){
 
@@ -83,7 +83,7 @@ int  main(int argc, char *argv[]){
                 break;
 
             default:
-                printf("Errore nella scelta del menu");
+                printf("Errore nella scelta inserita");
                 break;
         }
     }
@@ -116,10 +116,9 @@ void menuGioco(){
                "\t B -> menu precedente \n"
                "Inserisci la scelta e premi invio: ");
 
-        scanf("%c", &sceltaGioco);
+        scanf(" %c%*[^]", &sceltaGioco);
         sceltaGioco = toupper(sceltaGioco);
         printf("\n");
-        while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
         quitSelPunt = 0;
 
         switch(sceltaGioco){
@@ -128,12 +127,11 @@ void menuGioco(){
             case '0':
 
                 while(!quitSelPunt){
-                    printf("Vuoi giocare Pari, Dispari oppure vuoi Annulare? \n(P)(D)(A): ");
+                    printf("Vuoi giocare Pari(P), Dispari(D) oppure vuoi Annulare(A)?: ");
 
-                    scanf("%c", &sceltaPunt);
+                    scanf(" %c%*[^]", &sceltaPunt);
                     sceltaPunt = toupper(sceltaPunt);
                     printf("\n");
-                    while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
 
                     if(sceltaPunt == 'P' || sceltaPunt == 'D' || sceltaPunt == 'A') quitSelPunt = 1;
                     else printf("Errore nella scelta effettuata, riprovare! \n\n");
@@ -160,10 +158,9 @@ void menuGioco(){
                 while(!quitSelPunt){
                     printf("Vuoi giocare Manque (1-18), Passe (19-36) oppure vuoi Annulare? \n(M)(P)(A): ");
 
-                    scanf("%c", &sceltaPunt);
+                    scanf(" %c%*[^]", &sceltaPunt);
                     sceltaPunt = toupper(sceltaPunt);
                     printf("\n");
-                    while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
 
                     if(sceltaPunt == 'M' || sceltaPunt == 'P' || sceltaPunt == 'A') quitSelPunt = 1;
                     else printf("Errore nella scelta effettuata, riprovare! \n\n");
@@ -243,7 +240,7 @@ void menuGioco(){
     }
 }
 
-//Filippo: sorry but, which is the utility of this function?
+
 char menuPuntata(int index){
     const char arrDomande[NUM_DOMANDE][LUNG_DOMANDE] = {
         "Vuoi giocare Pari(P), Dispari(D) oppure vuoi Annulare(A)? \n(P)(D)(A): ",
@@ -258,8 +255,7 @@ int ricarica(int bilancio){
   int importo;
   char flush;
   printf("Inserire l'importo che si vuole ricaricare e premere invio: ");
-  scanf("%d", &importo);
-  while ((flush = fgetc(stdin)) != '\n' && flush != EOF);
+  scanf(" %d%*s", &importo);
   return bilancio + importo;
 }
 

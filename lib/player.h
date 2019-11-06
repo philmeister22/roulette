@@ -14,16 +14,14 @@ typedef struct giocatore{
 } player;
 
 
-player *login();                        /* mostra prompt di login/registrazione, returna
-                                        la struct del giocatore */
-player *newPlayer();
-
-int checkUsername(char *);              /* controlla che l'username contenga soltanto
-                                        [0-9, A-Z, a-z], returna 0 se non corretto */
-player *userExist(char *);              /* controlla l'esistenza del player nel file,
-                                        returna null se non esiste */
-void serialize(player *);          /* stampa la struct fornita nel file predefinito */
-player deserialize(char *);
+player *login();                /* mostra prompt di login/registrazione, returna
+                                la struct del giocatore */
+player *newPlayer();            /* registra e fa login di un nuovo utente */
+int checkUsername(char *);      /* controlla che l'username contenga soltanto
+                                [0-9, A-Z, a-z], returna 0 se non corretto */
+player *userExist(char *);      /* controlla l'esistenza del player nel file,
+                                returna null se non esiste */
+void serialize(player *);       /* stampa la struct fornita nel file predefinito */
 
 
 player *login(){

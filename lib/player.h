@@ -16,6 +16,8 @@ typedef struct giocatore{
 
 player *login();                        /* mostra prompt di login/registrazione, returna
                                         la struct del giocatore */
+player *newPlayer();
+
 int checkUsername(char *);              /* controlla che l'username contenga soltanto
                                         [0-9, A-Z, a-z], returna 0 se non corretto */
 player *userExist(char *);              /* controlla l'esistenza del player nel file,
@@ -27,21 +29,28 @@ player deserialize(char *);
 player *login(){
 
     char inputName[MAX_USERNAME + 1], flush;
-    player *player;
+    player *player = NULL;
 
-    do{
-        printf("\nInserisci il tuo username: ");
-        scanf("%30s", inputName);
-        while ((flush = fgetc(stdin)) != '\n' && flush != EOF);     /* flush buffer */
-    }while(!checkUsername(inputName));
+    while(!player){
+        do{
+            printf("\nInserisci il tuo username: ");
+            scanf("%30s", inputName);
+            /*while ((flush = fgetc(stdin)) != '\n' && flush != EOF);     /* flush buffer */
+        }while(!checkUsername(inputName));
 
-    userExist(inputName);
+        player = userExist(inputName);
+    }
 
     /* printf("Il tuo username \x8A %s ed \x8A lungo %d caratteri!", inputName, strlen(inputName)); */
 
     return player;
 }
 
+
+player *newPlayer(){
+    printf("Nuovo utente!!");
+    return NULL;
+}
 
 int checkUsername(char *username){
     int i = 0;
@@ -64,28 +73,40 @@ int checkUsername(char *username){
 
 player *userExist(char *username){
     FILE *fp;
-    char tmpName[MAX_USERNAME + 1] = {0};
+    player *tmp = NULL;
+    char sceltaNewp, tmpName[MAX_USERNAME + 1] = {0};
     int tmpSaldo = 0;
 
     if((fp = fopen(PLAYERS_FILE, "r"))){
 
         while(!feof(fp)){
             fscanf(fp, "%[^;];%d ", &tmpName, &tmpSaldo);
-            printf("%s | %s  %d \t", username, tmpName, tmpSaldo);
+            /* printf("\n%s | %s  %d \t", username, tmpName, tmpSaldo); */
 
             if(!strcmp(username, tmpName)){
-                printf("Sono uguali!\n");
+                tmp = (player *) malloc(sizeof(player));
+                strcpy(tmp->username, tmpName);
+                tmp->saldo = tmpSaldo;
+
+                return tmp;
             }
             else{
-                printf("Sono diversi!\n");
+                while(1){
+                    printf("\nL'utente inserito non esiste! \n"
+                           "Vuoi registrarti(R) oppure inserire un altro username(U)? ");
+                    scanf(" %c%*[^]", &sceltaNewp);
+                    sceltaNewp = toupper(sceltaNewp);
+
+                    if(sceltaNewp == 'R') return newPlayer();
+                    else if(sceltaNewp == 'U') return tmp;
+                    else printf("\nErrore nella scelta inserita \n");
+                }
             }
-
         }
-
     }else
         printf("Errore nell'apertura del file %s\n\n", PLAYERS_FILE);
 
-
+    return tmp;
 }
 
 

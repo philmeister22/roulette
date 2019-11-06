@@ -46,7 +46,7 @@ player *login(){
     return player;
 }
 
-
+/* TODO: create register user function*/
 player *newPlayer(){
     printf("Nuovo utente!!");
     return NULL;

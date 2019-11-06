@@ -46,7 +46,7 @@ int  main(int argc, char *argv[]){
     int rossi[]={1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
     int neri[]={2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35};
     player *player;
-    char sceltaMenu, flush;
+    char sceltaMenu;
     int bilancio = 10000, quit = 0;
 
     player = login();
@@ -95,7 +95,7 @@ int  main(int argc, char *argv[]){
 
 
 void menuGioco(){
-    char sceltaGioco, sceltaPunt, *tipoPunt, flush;
+    char sceltaGioco, sceltaPunt, *tipoPunt;
     int quitGioco = 0, quitSelPunt;
     bet *puntate;
 
@@ -253,7 +253,6 @@ char menuPuntata(int index){
 
 int ricarica(int bilancio){
   int importo;
-  char flush;
   printf("Inserire l'importo che si vuole ricaricare e premere invio: ");
   scanf(" %d%*s", &importo);
   return bilancio + importo;

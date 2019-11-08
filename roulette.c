@@ -51,6 +51,8 @@ int  main(int argc, char *argv[]){
 
     player = login();
 
+    printf("%s | %d", player->username, player->saldo);
+
     while(!quit){
         printf("\n\n"
                "-----MENU----- \n"
